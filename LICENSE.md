@@ -35,7 +35,7 @@ URL for them above, as well as copies of any plain-text lines
 beginning with `Required Notice:` that the licensor provided
 with the software. For example:
 
-> Required Notice: Copyright Ana (https://github.com/AromeroGill/reservas-app)
+> Required Notice: Copyright Alejandro Romero (https://github.com/AromeroGill/reservas-app)
 
 ## Changes and New Works License
 
