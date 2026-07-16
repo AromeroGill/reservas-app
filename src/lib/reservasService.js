@@ -97,20 +97,23 @@ export async function crearReserva({ negocioId, servicio, empleadoId, inicio, cl
     .select()
     .single();
   if (error) throw error;
+
+  // Dispara el email de confirmación (sin bloquear la reserva si falla)
+  try {
+    await fetch(
+      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/email-confirmacion`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ reserva_id: data.id }),
+      }
+    );
+  } catch (e) {
+    console.error("Email de confirmación falló, la reserva sí se creó:", e);
+  }
+
   return data;
-}
-try {
-  await fetch(
-    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/email-confirmacion`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-      },
-      body: JSON.stringify({ reserva_id: nuevaReserva.id }),
-    }
-  );
-} catch (e) {
-  console.error("Email de confirmación falló, la reserva sí se creó:", e);
 }
