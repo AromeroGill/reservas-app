@@ -76,7 +76,7 @@ const [horariosRes, reservasRes, bloqueosRes] = await Promise.all([
 export async function crearReserva({ negocioId, servicio, empleadoId, inicio, cliente }) {
   const fin = new Date(inicio.getTime() + servicio.duracion_min * 60000);
 
-  const huecos = await getHuecosDisponibles({ empleadoId, servicio, dia: inicio });
+  const huecos = await getHuecosDisponibles({ negocioId, empleadoId, servicio, dia: inicio });
   const sigueLibre = huecos.some((h) => h.inicio.getTime() === inicio.getTime());
   if (!sigueLibre) {
     throw new Error('Ese hueco acaba de ocuparse. Elige otro, por favor.');
