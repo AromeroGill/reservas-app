@@ -43,22 +43,23 @@ export default function PaginaReserva() {
 
   // 3. Recalcular huecos cuando cambian servicio, empleado o día
   useEffect(() => {
-    if (!servicio || !empleadoId || !dia) {
-      setHuecos([]);
-      return;
-    }
-    setCargando(true);
-    setHuecoElegido(null);
-   getHuecosDisponibles({
-      negocioId,
-      empleadoId,
-      servicio,
-      dia: new Date(dia + 'T12:00:00'),
-    })
-      .then(setHuecos)
-      .catch((e) => setError(e.message))
-      .finally(() => setCargando(false));
-  }, [servicio, empleadoId, dia]);
+  if (!negocioId || !servicio || !empleadoId || !dia) {
+    setHuecos([]);
+    return;
+  }
+  setError(null);
+  setCargando(true);
+  setHuecoElegido(null);
+  getHuecosDisponibles({
+    negocioId,
+    empleadoId,
+    servicio,
+    dia: new Date(dia + 'T12:00:00'),
+  })
+    .then(setHuecos)
+    .catch((e) => setError(e.message))
+    .finally(() => setCargando(false));
+}, [negocioId, servicio, empleadoId, dia]);
 
   async function confirmar() {
     setError('');
