@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./lib/AuthContext";
+import './App.css'
 import PaginaReserva from "./PaginaReserva";
 import Login from "./admin/Login";
 import RutaProtegida from "./admin/RutaProtegida";
