@@ -49,7 +49,8 @@ export default function PaginaReserva() {
     }
     setCargando(true);
     setHuecoElegido(null);
-    getHuecosDisponibles({
+   getHuecosDisponibles({
+      negocioId,
       empleadoId,
       servicio,
       dia: new Date(dia + 'T12:00:00'),

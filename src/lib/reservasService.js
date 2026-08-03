@@ -30,7 +30,7 @@ export async function getEmpleados(negocioId) {
   return data;
 }
 
-export async function getHuecosDisponibles({ empleadoId, servicio, dia }) {
+export async function getHuecosDisponibles({ negocioId, empleadoId, servicio, dia }) {
   const inicioDia = new Date(dia); inicioDia.setHours(0, 0, 0, 0);
   const finDia = new Date(dia); finDia.setHours(23, 59, 59, 999);
 
