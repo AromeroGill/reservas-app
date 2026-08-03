@@ -11,7 +11,7 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Navigate to="/reservar/tu-negocio" replace />} />
+          <Route path="/" element={<Navigate to="/reservar/EL_SLUG_REAL" replace />} />
           <Route path="/reservar/:slug" element={<PaginaReserva />} />
           <Route path="/admin/login" element={<Login />} />
           <Route
