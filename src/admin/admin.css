@@ -1,0 +1,76 @@
+.login-fondo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem 1.5rem;
+}
+
+.login-caja {
+  background: var(--hueso);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem 2.5rem;
+  animation: aparecer 0.6s both;
+}
+
+.login-caja h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--tinta);
+  margin: 0 0 0.4rem;
+}
+
+.login-sub {
+  color: var(--tinta-suave);
+  font-size: 0.95rem;
+  margin: 0 0 2rem;
+}
+
+.login-caja label {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  margin: 0 0 0.5rem;
+}
+
+.login-caja input {
+  margin-bottom: 1.3rem;
+  cursor: text;
+}
+
+.login-error {
+  background: #fbeae5;
+  color: var(--arcilla-oscura);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.95rem;
+  margin: 0 0 1.2rem;
+}
+
+.login-caja button {
+  width: 100%;
+  padding: 1.05rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--arcilla);
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.02rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.login-caja button:hover:not(:disabled) { background: var(--arcilla-oscura); }
+.login-caja button:active { transform: scale(0.99); }
+.login-caja button:disabled { opacity: 0.55; cursor: not-allowed; }
