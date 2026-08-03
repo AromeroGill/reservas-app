@@ -1,0 +1,122 @@
+.cal-barra {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.cal-barra h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  margin: 0;
+  text-transform: capitalize;
+  flex: 1 1 auto;
+}
+
+.cal-boton {
+  font-family: 'Nunito Sans', sans-serif;
+  border: 1px solid var(--salvia, #9caf9a);
+  background: transparent;
+  color: inherit;
+  border-radius: 8px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+}
+
+.cal-boton:hover { background: rgba(156, 175, 154, 0.15); }
+
+.cal-select {
+  font-family: 'Nunito Sans', sans-serif;
+  border: 1px solid var(--salvia, #9caf9a);
+  border-radius: 8px;
+  padding: 0.35rem 0.5rem;
+  background: transparent;
+}
+
+.cal-marco {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cal-cabecera,
+.cal-cuerpo {
+  display: grid;
+  grid-template-columns: 56px repeat(7, minmax(0, 1fr));
+}
+
+.cal-cabecera {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(156, 175, 154, 0.12);
+}
+
+.cal-cabecera div {
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.cal-cabecera .cal-hoy { font-weight: 700; color: var(--terracota, #c96f4a); }
+
+.cal-cuerpo { position: relative; }
+
+.cal-horas { border-right: 1px solid rgba(0, 0, 0, 0.08); }
+
+.cal-hora {
+  height: 56px;
+  font-size: 0.7rem;
+  text-align: right;
+  padding-right: 0.35rem;
+  color: rgba(0, 0, 0, 0.45);
+  transform: translateY(-0.4em);
+}
+
+.cal-dia {
+  position: relative;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.06) 0 1px,
+    transparent 1px 56px
+  );
+}
+
+.cal-cita {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 6px;
+  border-left: 3px solid;
+  padding: 2px 4px;
+  font-size: 0.7rem;
+  line-height: 1.15;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.cal-cita {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.25);
+}
+.cal-cita strong { display: block; font-weight: 600; }
+.cal-cita span { opacity: 0.75; }
+
+.cal-cita.sel { outline: 2px solid var(--terracota, #c96f4a); }
+
+.cal-cita.pendiente {
+  background: rgba(156, 175, 154, 0.25);
+  border-color: var(--salvia, #9caf9a);
+}
+.cal-cita.confirmada {
+  background: rgba(201, 111, 74, 0.22);
+  border-color: var(--terracota, #c96f4a);
+}
+.cal-cita.cancelada {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.25);
+  text-decoration: line-through;
+  opacity: 0.65;
+}
