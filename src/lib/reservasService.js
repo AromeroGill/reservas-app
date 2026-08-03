@@ -34,22 +34,23 @@ export async function getHuecosDisponibles({ empleadoId, servicio, dia }) {
   const inicioDia = new Date(dia); inicioDia.setHours(0, 0, 0, 0);
   const finDia = new Date(dia); finDia.setHours(23, 59, 59, 999);
 
-  const [horariosRes, reservasRes, bloqueosRes] = await Promise.all([
-    supabase.from('horarios').select('*').eq('empleado_id', empleadoId),
-    supabase
-      .from('reservas')
-      .select('inicio, fin')
-      .eq('empleado_id', empleadoId)
-      .eq('estado', 'confirmada')
-      .gte('inicio', inicioDia.toISOString())
-      .lte('inicio', finDia.toISOString()),
-    supabase
-      .from('bloqueos')
-      .select('inicio, fin')
-      .eq('empleado_id', empleadoId)
-      .lte('inicio', finDia.toISOString())
-      .gte('fin', inicioDia.toISOString()),
-  ]);
+const [horariosRes, reservasRes, bloqueosRes] = await Promise.all([
+  supabase.from('horarios').select('*').eq('empleado_id', empleadoId),
+
+  supabase.rpc('tramos_ocupados', {
+    p_negocio:  negocioId,
+    p_empleado: empleadoId,
+    p_desde:    inicioDia.toISOString(),
+    p_hasta:    finDia.toISOString(),
+  }),
+
+  supabase
+    .from('bloqueos')
+    .select('inicio, fin')
+    .eq('empleado_id', empleadoId)
+    .lte('inicio', finDia.toISOString())
+    .gte('fin', inicioDia.toISOString()),
+]);
 
   if (horariosRes.error) throw horariosRes.error;
   if (reservasRes.error) throw reservasRes.error;
