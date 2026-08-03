@@ -120,3 +120,12 @@
   text-decoration: line-through;
   opacity: 0.65;
 }
+.cal-barra .cal-select {
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.cal-barra h2 {
+  flex: 1 1 180px;
+  text-transform: none;
+}
