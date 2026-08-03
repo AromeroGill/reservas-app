@@ -82,21 +82,16 @@ export async function crearReserva({ negocioId, servicio, empleadoId, inicio, cl
     throw new Error('Ese hueco acaba de ocuparse. Elige otro, por favor.');
   }
 
-  const { data, error } = await supabase
-    .from('reservas')
-    .insert({
-      negocio_id: negocioId,
-      servicio_id: servicio.id,
-      empleado_id: empleadoId,
-      cliente_nombre: cliente.nombre,
-      cliente_email: cliente.email,
-      cliente_telefono: cliente.telefono ?? null,
-      inicio: inicio.toISOString(),
-      fin: fin.toISOString(),
-      estado: 'confirmada',
-    })
-    .select()
-    .single();
+const { data, error } = await supabase.rpc('crear_reserva', {
+    p_negocio:  negocioId,
+    p_servicio: servicio.id,
+    p_empleado: empleadoId,
+    p_nombre:   cliente.nombre,
+    p_email:    cliente.email,
+    p_telefono: cliente.telefono ?? null,
+    p_inicio:   inicio.toISOString(),
+    p_fin:      fin.toISOString(),
+  });
   if (error) throw error;
 
   // Dispara el email de confirmación (sin bloquear la reserva si falla)
