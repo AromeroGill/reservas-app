@@ -34,3 +34,24 @@ export async function listarEmpleados({ soloActivos = true } = {}) {
   if (error) throw error;
   return data ?? [];
 }
+
+export const ESTADOS = ['confirmada', 'completada', 'cancelada'];
+
+export const ETIQUETA_ESTADO = {
+  confirmada: 'Confirmada',
+  completada: 'Completada',
+  cancelada: 'Cancelada',
+};
+
+/** Actualiza campos de una reserva y devuelve la fila ya actualizada. */
+export async function actualizarReserva(id, cambios) {
+  const { data, error } = await supabase
+    .from('reservas')
+    .update(cambios)
+    .eq('id', id)
+    .select(CAMPOS_RESERVA)
+    .single();
+
+  if (error) throw error;
+  return data;
+}

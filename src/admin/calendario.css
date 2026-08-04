@@ -106,19 +106,19 @@
 
 .cal-cita.sel { outline: 2px solid var(--terracota, #c96f4a); }
 
-.cal-cita.pendiente {
-  background: rgba(156, 175, 154, 0.25);
-  border-color: var(--salvia, #9caf9a);
+.cal-cita.completada {
+  background: rgba(99, 153, 34, 0.342);
+  border-color: var(#639922);
 }
 .cal-cita.confirmada {
   background: rgba(201, 111, 74, 0.22);
   border-color: var(--terracota, #c96f4a);
 }
 .cal-cita.cancelada {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.25);
+  background: transparent;
+  border-color: rgba(0, 0, 0, 0.18);
   text-decoration: line-through;
-  opacity: 0.65;
+  opacity: 0.6;
 }
 .cal-barra .cal-select {
   width: auto;
@@ -128,4 +128,65 @@
 .cal-barra h2 {
   flex: 1 1 180px;
   text-transform: none;
+}
+
+.pr-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100vh;
+  overflow-y: auto;
+  background: #fff;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: -6px 0 20px rgba(0, 0, 0, 0.08);
+  padding: 1.25rem;
+  z-index: 40;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.pr-cabecera {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pr-cabecera h3 {
+  font-family: 'Fraunces', serif;
+  margin: 0;
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+.pr-datos { margin: 0 0 1.25rem; font-size: 0.875rem; }
+.pr-datos dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+  margin-top: 0.75rem;
+}
+.pr-datos dd { margin: 0.15rem 0 0; }
+
+.pr-campo { display: block; margin-bottom: 0.9rem; }
+.pr-campo span {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+  margin-bottom: 0.25rem;
+}
+.pr-campo .cal-select { width: 100%; }
+
+.pr-acciones { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.pr-peligro { border-color: #b3261e; color: #b3261e; }
+.pr-peligro:hover { background: rgba(179, 38, 30, 0.08); }
+
+.pr-aviso { font-size: 0.8rem; margin: 0.75rem 0 0; }
+.pr-error { color: #b3261e; }
+
+@media (max-width: 720px) {
+  .pr-panel { width: 100%; }
 }

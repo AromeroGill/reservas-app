@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import CalendarioSemana from './CalendarioSemana';
+import PanelReserva from './PanelReserva';
 import { listarReservasEntre, listarEmpleados } from '../lib/panelService';
 import { inicioDeSemana, sumarDias, rangoSemanaTexto } from '../lib/fechas';
 
@@ -18,18 +19,19 @@ export default function AgendaSemana() {
       .catch((e) => console.error('Error cargando empleados:', e));
   }, []);
 
-  useEffect(() => {
-    let cancelado = false;
+  const cargar = useCallback(async () => {
     setCargando(true);
     setError(null);
-
-    listarReservasEntre(lunes, sumarDias(lunes, 7))
-      .then((datos) => { if (!cancelado) setReservas(datos); })
-      .catch((e) => { if (!cancelado) setError(e.message ?? 'Error desconocido'); })
-      .finally(() => { if (!cancelado) setCargando(false); });
-
-    return () => { cancelado = true; };
+    try {
+      setReservas(await listarReservasEntre(lunes, sumarDias(lunes, 7)));
+    } catch (e) {
+      setError(e.message ?? 'Error desconocido');
+    } finally {
+      setCargando(false);
+    }
   }, [lunes]);
+
+  useEffect(() => { cargar(); }, [cargar]);
 
   const visibles = useMemo(
     () => (empleadoId === 'todos'
@@ -37,6 +39,11 @@ export default function AgendaSemana() {
       : reservas.filter((r) => r.empleado_id === empleadoId)),
     [reservas, empleadoId]
   );
+
+  function alGuardar(actualizada) {
+    setSeleccionada(actualizada);
+    cargar();
+  }
 
   return (
     <section>
@@ -70,9 +77,12 @@ export default function AgendaSemana() {
       />
 
       {seleccionada && (
-        <p style={{ marginTop: '1rem', fontSize: '0.85rem', opacity: 0.7 }}>
-          Seleccionada: {seleccionada.cliente_nombre} ({seleccionada.estado})
-        </p>
+        <PanelReserva
+          reserva={seleccionada}
+          reservasSemana={reservas}
+          onCerrar={() => setSeleccionada(null)}
+          onGuardada={alGuardar}
+        />
       )}
     </section>
   );
